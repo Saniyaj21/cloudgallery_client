@@ -1,0 +1,33 @@
+.profilePage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0px;
+    >div{
+        max-width: 300px;
+
+        position: relative;
+        padding: 2px 0px;
+        >img{
+            border-radius: 50%;
+            height: 200px;
+            width: 200px;
+            border: 2px solid white;
+        }
+        >span{
+            font-size: 20px;
+            background-color: #213547;
+            padding: 7px 7px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            color: white;
+            position: absolute;
+            right: 80px;
+            bottom: 10px;
+            border: 2px solid white;
+        }
+    }
+}
