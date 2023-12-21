@@ -1,0 +1,47 @@
+.photo-page-div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    >div{
+        width: 300px;
+        margin: 30px 10px;
+        padding: 10px 0px;
+        border-radius: 5px;
+        border: 1px solid white;
+        >div{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            >img{
+                border-radius: 10px;
+                width: 90%;
+                height: auto;
+            }
+            >p{
+                padding: 0px 10%;
+            }
+            >button{
+                background: transparent;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+			color: white;
+			padding: 10px 20px;
+			border-radius: 10px;
+			font-family: "Roboto";
+			transition: 0.5s;
+            border: 1px solid white;
+            margin: 10px 10px;
+			&:hover {
+				background-color: white;
+				color: #242424;
+			}
+            }
+        }
+    }
+}
