@@ -15,7 +15,7 @@ import ProtectedRoute from "./ProtectedRoute.jsx";
 import Profile from "./pages/user/Profile.jsx";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/ReactToastify.min.css";
-import Register from './pages/auth/register/Register.jsx';
+import Register from './pages/auth/register/register.jsx';
 
 function App() {
 	const dispatch = useDispatch();
