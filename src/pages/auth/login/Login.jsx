@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, selectUser } from "../../../redux/slices/authSlice";
+import { clearError, loginUser, selectUser } from "../../../redux/slices/authSlice";
 import Loader from "../../lauout/loader/Loader";
 import { toast } from "react-toastify";
 
@@ -15,7 +15,7 @@ function Login() {
 	const { isAuthenticated, status , error} = useSelector(selectUser);
 
 	useEffect(() => {
-		
+		dispatch(clearError())
 		if (isAuthenticated === true) {
 			navigate("/");
 		}
