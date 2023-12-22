@@ -101,7 +101,7 @@ function Register() {
 								className='file-input'
 								id='dp'
 								type='file'
-								name='avatar'
+								// name='avatar'
 								accept=".jpg, .jpeg, .png"
 								required
 								onChange={handleFileChange}
