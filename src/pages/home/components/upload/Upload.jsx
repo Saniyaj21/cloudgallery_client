@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import "./upload.scss";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Resizer from "react-image-file-resizer";
 import Loader from "../../../lauout/loader/Loader";
 import { toast } from "react-toastify";
 import imageCompression from "browser-image-compression";
@@ -42,7 +40,7 @@ const Upload = () => {
 				setImgPreview(e.target.result);
 			};
 
-			reader.readAsDataURL(compressedFile); // write your own logic
+			reader.readAsDataURL(compressedFile); 
 		} catch (error) {
 			console.log(error);
 		}

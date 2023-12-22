@@ -13,17 +13,21 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import Profile from "./pages/user/Profile.jsx";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/ReactToastify.min.css";
 import Register from './pages/auth/register/register.jsx';
 
 function App() {
 	const dispatch = useDispatch();
-	const { isAuthenticated } = useSelector(selectUser);
-
+	const { isAuthenticated , user} = useSelector(selectUser);
+console.log("app");
 	useEffect(() => {
 		dispatch(getUser());
-	}, [dispatch]);
+		if (isAuthenticated === true) {
+			toast.success(`Welcome ${user?.name}`)
+			
+		}
+	}, [dispatch, isAuthenticated]);
 
 	return (
 		<Router>

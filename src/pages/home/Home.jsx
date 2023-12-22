@@ -6,10 +6,14 @@ import TextsPage from "./components/view/TextsPage";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 const Home = () => {
 	const [view, setView] = useState("p");
-	const { isAuthenticated } = useSelector(selectUser);
+	const { isAuthenticated , user} = useSelector(selectUser);
 	const navigate = useNavigate();
+
+console.log("home");
 
 	const toggleView = (param) => {
 		setView(param);
