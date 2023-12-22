@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser, selectUser } from "../../../redux/slices/authSlice";
+import { clearError, registerUser, selectUser } from "../../../redux/slices/authSlice";
 import { toast } from "react-toastify";
 import imageCompression from "browser-image-compression";
 import Loader from "../../lauout/loader/Loader";
@@ -16,6 +16,7 @@ function Register() {
 	const { isAuthenticated, status, error } = useSelector(selectUser);
 
 	useEffect(() => {
+		dispatch(clearError())
 		if (isAuthenticated === true) {
 			navigate("/");
 		}
