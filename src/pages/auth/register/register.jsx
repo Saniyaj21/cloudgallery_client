@@ -20,10 +20,10 @@ function Register() {
 		if (isAuthenticated === true) {
 			navigate("/");
 		}
-		if (error) {
-			toast.error("Try again")
-		}
-	}, [dispatch, isAuthenticated, navigate, error]);
+		// if (error) {
+		// 	toast.error("Try again")
+		// }
+	}, [dispatch, isAuthenticated, navigate]);
 
 	const handleFileChange = async (e) => {
 		const imageFile = e.target.files[0];
