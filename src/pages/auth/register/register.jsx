@@ -13,13 +13,16 @@ function Register() {
 	const [imgPreview, setImgPreview] = useState("/dp-min.png");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { isAuthenticated, status } = useSelector(selectUser);
+	const { isAuthenticated, status, error } = useSelector(selectUser);
 
 	useEffect(() => {
 		if (isAuthenticated === true) {
 			navigate("/");
 		}
-	}, [dispatch, isAuthenticated, navigate]);
+		if (error) {
+			toast.error("Try again")
+		}
+	}, [dispatch, isAuthenticated, navigate, error]);
 
 	const handleFileChange = async (e) => {
 		const imageFile = e.target.files[0];
@@ -55,18 +58,18 @@ function Register() {
 
 		try {
 			if (Object.entries(user).length == 0) {
-				return toast.error("plese input valid data....");
+				return toast.error("Please Enter Valid Data!");
 			}
 			if (!user.name || !user.email || !user.password) {
-				return toast.error("name and email and password required....");
+				return toast.error("Name and Email Required!");
 			}
 
 			if (user.password.length < 8) {
-				return toast.error("password must be 8 characters....");
+				return toast.error("Password need 8 character minimum!");
 			}
 
 			if (user.password != user.cpassword) {
-				return toast.error("password and confirm password are not match...");
+				return toast.error("Confirm password again!");
 			}
 			const myForm = new FormData();
 
@@ -98,6 +101,8 @@ function Register() {
 								className='file-input'
 								id='dp'
 								type='file'
+								name='avatar'
+								accept=".jpg, .jpeg, .png"
 								required
 								onChange={handleFileChange}
 							/>

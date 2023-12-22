@@ -20,7 +20,6 @@ import Register from './pages/auth/register/register.jsx';
 function App() {
 	const dispatch = useDispatch();
 	const { isAuthenticated , user} = useSelector(selectUser);
-console.log("app");
 	useEffect(() => {
 		dispatch(getUser());
 		if (isAuthenticated === true) {
