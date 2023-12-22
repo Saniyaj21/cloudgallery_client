@@ -13,7 +13,6 @@ const Home = () => {
 	const { isAuthenticated , user} = useSelector(selectUser);
 	const navigate = useNavigate();
 
-console.log("home");
 
 	const toggleView = (param) => {
 		setView(param);

@@ -5,18 +5,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, selectUser } from "../../../redux/slices/authSlice";
 import Loader from "../../lauout/loader/Loader";
+import { toast } from "react-toastify";
+
 
 function Login() {
 	const [user, setUser] = useState({});
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { isAuthenticated, status } = useSelector(selectUser);
+	const { isAuthenticated, status , error} = useSelector(selectUser);
 
 	useEffect(() => {
+		
 		if (isAuthenticated === true) {
 			navigate("/");
 		}
-	}, [dispatch, isAuthenticated, navigate]);
+		if (error) {
+			toast.error("Try again")
+		}
+	}, [dispatch, isAuthenticated, navigate, error]);
 
 	const hendleData = (e) => {
 		setUser({ ...user, [e.target.name]: e.target.value });
@@ -46,14 +52,14 @@ function Login() {
 								type='email'
 								name='email'
 								id='userEmail'
-								placeholder='enter valid Email'
+								placeholder='Email'
 								onChange={hendleData}
 							/>
 							<input
 								type='password'
 								name='password'
 								id='UserPassword'
-								placeholder='enter vaild password '
+								placeholder='Password'
 								onChange={hendleData}
 							/>
 
