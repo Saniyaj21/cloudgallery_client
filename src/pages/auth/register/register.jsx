@@ -82,7 +82,7 @@ function Register() {
 			dispatch(registerUser(myForm));
 		} catch (error) {
 			console.error("err", error);
-			toast.error(error.response.data.message);
+			
 		}
 	};
 
