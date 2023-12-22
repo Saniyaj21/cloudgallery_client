@@ -11,11 +11,11 @@ import Loader from "../../../lauout/loader/Loader";
 import { toast } from "react-toastify";
 
 const PhotosPage = () => {
-	const { images, postStatus, error  } = useSelector(selectImages);
+	const { images, postStatus, error } = useSelector(selectImages);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(resetState())
+		dispatch(resetState());
 		dispatch(allImages());
 		if (error) {
 			toast.error("Try again!", {
@@ -25,11 +25,10 @@ const PhotosPage = () => {
 				theme: "colored",
 			});
 		}
-		
 	}, [error]);
 
 	const deleteImageHandler = (id) => {
-		dispatch(resetState())
+		dispatch(resetState());
 		dispatch(deleteImage(id));
 		toast.success("Deleted Successfully!", {
 			position: "top-right",
@@ -60,10 +59,10 @@ const PhotosPage = () => {
 				images.map((img, index) => (
 					<div key={index}>
 						<div>
-							<img src={img.url} className='show-image' />
+							<p>{img.caption}</p>
 						</div>
 						<div>
-							<p>{img.caption}</p>
+							<img src={img.url} className='show-image' />
 						</div>
 						<div>
 							<button

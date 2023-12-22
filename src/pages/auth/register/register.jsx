@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import "./register.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, selectUser } from "../../../redux/slices/authSlice";
+import { toast } from "react-toastify";
+import imageCompression from "browser-image-compression";
+import Loader from "../../lauout/loader/Loader";
 
 function Register() {
 	const [user, setUser] = useState({});
-	const [avatar, setAvatar] = useState("/Profile.png");
+	const [avatar, setAvatar] = useState();
+	const [imgPreview, setImgPreview] = useState("/dp-min.png");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { isAuthenticated } = useSelector(selectUser);
+	const { isAuthenticated, status } = useSelector(selectUser);
 
 	useEffect(() => {
 		if (isAuthenticated === true) {
@@ -18,18 +21,28 @@ function Register() {
 		}
 	}, [dispatch, isAuthenticated, navigate]);
 
-	const handleFileChange = (e) => {
-		const file = e.target.files[0];
+	const handleFileChange = async (e) => {
+		const imageFile = e.target.files[0];
 
-		if (file) {
+		const options = {
+			maxSizeMB: 1,
+			maxWidthOrHeight: 1920,
+			useWebWorker: true,
+		};
+		try {
+			const compressedFile = await imageCompression(imageFile, options);
+
 			const reader = new FileReader();
+
 			reader.onload = function (e) {
+				// Set the result of the FileReader to the state variable
 				setAvatar(e.target.result);
+				setImgPreview(e.target.result);
 			};
 
-			reader.readAsDataURL(file);
-		} else {
-			console.log("Error happened");
+			reader.readAsDataURL(compressedFile);
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
@@ -70,52 +83,62 @@ function Register() {
 	};
 
 	return (
-		<div>
-			<form action='' className='auth-form' onSubmit={createNewUser}>
-				<b style={{ fontSize: "25px" }}>registration form </b>
-
-				<input
-					className='file-input'
-					type='file'
-					required
-					onChange={handleFileChange}
-				/>
-				<input
-					type='name'
-					placeholder='enter fullname '
-					name='name'
-					onChange={handleData}
-				/>
-				<input
-					type='email'
-					name='email'
-					id='email'
-					placeholder='enter Email'
-					onChange={handleData}
-				/>
-				<input
-					type='password'
-					name='password'
-					id='pass1'
-					placeholder='enter password '
-					onChange={handleData}
-				/>
-				<input
-					type='password'
-					name='cpassword'
-					id='pass2'
-					placeholder='enter  confirm password'
-					onChange={handleData}
-				/>
-				<button type='submit'> Register </button>
-				<hr />
-				<b>You have alrady register </b>
-				<Link to={"/login"}>
-					{" "}
-					<button> Log in </button>{" "}
-				</Link>
-			</form>
-		</div>
+		<>
+			{status === "loading" ? (
+				<Loader />
+			) : (
+				<>
+					<div className='register-main'>
+						<form action='' className='auth-form' onSubmit={createNewUser}>
+							<h3>Register </h3>
+							<label htmlFor='dp'>
+								<img src={imgPreview} alt='' />
+							</label>
+							<input
+								className='file-input'
+								id='dp'
+								type='file'
+								required
+								onChange={handleFileChange}
+							/>
+							<input
+								type='name'
+								placeholder='Full Name'
+								name='name'
+								onChange={handleData}
+							/>
+							<input
+								type='email'
+								name='email'
+								id='email'
+								placeholder='Email'
+								onChange={handleData}
+							/>
+							<input
+								type='password'
+								name='password'
+								id='pass1'
+								placeholder='Password'
+								onChange={handleData}
+							/>
+							<input
+								type='password'
+								name='cpassword'
+								id='pass2'
+								placeholder='Reenter Password'
+								onChange={handleData}
+							/>
+							<button type='submit'> Register </button>
+							<hr />
+							<p>
+								You have alrady registered?
+								<Link to={"/login"}> Login Here</Link>
+							</p>
+						</form>
+					</div>
+				</>
+			)}
+		</>
 	);
 }
 
