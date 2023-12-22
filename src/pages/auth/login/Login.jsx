@@ -19,10 +19,10 @@ function Login() {
 		if (isAuthenticated === true) {
 			navigate("/");
 		}
-		if (error) {
-			toast.error("Try again")
-		}
-	}, [dispatch, isAuthenticated, navigate, error]);
+		// if (error) {
+		// 	toast.error("Try again")
+		// }
+	}, [dispatch, isAuthenticated, navigate]);
 
 	const hendleData = (e) => {
 		setUser({ ...user, [e.target.name]: e.target.value });
