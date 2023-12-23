@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./header.scss";
 import { Link } from "react-router-dom";
-import sani from "../../../assets/sani.jpg";
+import sani from "../../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser, selectUser } from "../../../redux/slices/authSlice";
 

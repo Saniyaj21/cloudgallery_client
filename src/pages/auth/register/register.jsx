@@ -2,28 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, registerUser, selectUser } from "../../../redux/slices/authSlice";
+import {
+	clearError,
+	registerUser,
+	selectUser,
+} from "../../../redux/slices/authSlice";
 import { toast } from "react-toastify";
 import imageCompression from "browser-image-compression";
 import Loader from "../../lauout/loader/Loader";
 
 function Register() {
 	const [user, setUser] = useState({});
-	const [avatar, setAvatar] = useState();
+	const [avatar, setAvatar] = useState("");
 	const [imgPreview, setImgPreview] = useState("/dp-min.png");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { isAuthenticated, status, error } = useSelector(selectUser);
 
-	useEffect(() => {
-		dispatch(clearError())
-		if (isAuthenticated === true) {
-			navigate("/");
-		}
-		// if (error) {
-		// 	toast.error("Try again")
-		// }
-	}, [dispatch, isAuthenticated, navigate]);
 
 	const handleFileChange = async (e) => {
 		const imageFile = e.target.files[0];
@@ -56,7 +51,6 @@ function Register() {
 
 	const createNewUser = async (e) => {
 		e.preventDefault();
-
 		try {
 			if (Object.entries(user).length == 0) {
 				return toast.error("Please Enter Valid Data!");
@@ -67,6 +61,9 @@ function Register() {
 
 			if (user.password.length < 8) {
 				return toast.error("Password need 8 character minimum!");
+			}
+			if (avatar === "") {
+				return toast.error("Select Profile Picture!");
 			}
 
 			if (user.password != user.cpassword) {
@@ -82,9 +79,19 @@ function Register() {
 			dispatch(registerUser(myForm));
 		} catch (error) {
 			console.error("err", error);
-			
 		}
 	};
+
+	useEffect(() => {
+		dispatch(clearError())
+		if (isAuthenticated === true) {
+			navigate("/");
+		}
+		console.log("r", 2);
+		if (error) {
+			toast.error("Try again");
+		}
+	}, [dispatch, isAuthenticated, navigate, error]);
 
 	return (
 		<>
@@ -103,8 +110,7 @@ function Register() {
 								id='dp'
 								type='file'
 								// name='avatar'
-								accept=".jpg, .jpeg, .png"
-								required
+								accept='.jpg, .jpeg, .png'
 								onChange={handleFileChange}
 							/>
 							<input

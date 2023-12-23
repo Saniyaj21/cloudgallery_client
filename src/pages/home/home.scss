@@ -9,6 +9,10 @@
 .home-container{
 	margin-bottom: 100px;
 	margin-top: 10px;
+	>p{
+		font-family: "Roboto";
+		color: rgba(0, 255, 255, 0.559);
+	}
 }
 .photo-container{
 	display: none;

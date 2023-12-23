@@ -4,7 +4,7 @@ import "./loader.scss";
 const Loader = () => {
 	return (
 		<div className='loader-div'>
-			<span>Uploading</span>
+			<span>Loading</span>
 			<ThreeDots
 				height='40'
 				width='40'

@@ -13,18 +13,18 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import Profile from "./pages/user/Profile.jsx";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
-import Register from './pages/auth/register/register.jsx';
+import Register from "./pages/auth/register/register.jsx";
+import PageNotFound from "./pages/lauout/404/PageNotFound.jsx";
 
 function App() {
 	const dispatch = useDispatch();
-	const { isAuthenticated , user} = useSelector(selectUser);
+	const { isAuthenticated, user } = useSelector(selectUser);
 	useEffect(() => {
 		dispatch(getUser());
 		if (isAuthenticated === true) {
-			toast.success(`Welcome ${user?.name}`)
-			
+			toast.success(`Welcome ${user?.name}`);
 		}
 	}, [dispatch, isAuthenticated]);
 
@@ -33,20 +33,21 @@ function App() {
 			<Header />
 			<ToastContainer />
 			<Routes>
+				<Route path='/register' element={<Register />} />
+				<Route path='/login' element={<Login />} />
+
 				{/* Restricted routes */}
 				<Route element={<ProtectedRoute />}>
 					<Route path='/' element={<Home />} />
 					<Route path='/upload' element={<Upload />} />
 					<Route path='/profile' element={<Profile />} />
 				</Route>
+				<Route path='*' element={<PageNotFound />} />
 
-				<Route path='/register' element={<Register />} />
-				<Route path='/login' element={<Login />} />
-
-				<Route path='/:id' element={<Option />} />
+				{/* <Route path='/:id' element={<Option />} />
 				<Route path='/auth/forgotPassword' element={<ForgotPass />} />
 				<Route path='/auth/forgotPassword/otp' element={<Otp />} />
-				<Route path='/auth/forgotPassword/newpass' element={<NewPass />} />
+				<Route path='/auth/forgotPassword/newpass' element={<NewPass />} /> */}
 			</Routes>
 		</Router>
 	);
