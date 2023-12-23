@@ -3,26 +3,19 @@ import React, { useEffect, useState } from "react";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, loginUser, selectUser } from "../../../redux/slices/authSlice";
+import {
+	clearError,
+	loginUser,
+	selectUser,
+} from "../../../redux/slices/authSlice";
 import Loader from "../../lauout/loader/Loader";
 import { toast } from "react-toastify";
-
 
 function Login() {
 	const [user, setUser] = useState({});
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const { isAuthenticated, status , error} = useSelector(selectUser);
-
-	useEffect(() => {
-		dispatch(clearError())
-		if (isAuthenticated === true) {
-			navigate("/");
-		}
-		// if (error) {
-		// 	toast.error("Try again")
-		// }
-	}, [dispatch, isAuthenticated, navigate]);
+	const { isAuthenticated, status, error } = useSelector(selectUser);
 
 	const hendleData = (e) => {
 		setUser({ ...user, [e.target.name]: e.target.value });
@@ -39,6 +32,16 @@ function Login() {
 		dispatch(loginUser(user));
 	};
 
+	useEffect(() => {
+		dispatch(clearError());
+		if (isAuthenticated === true) {
+			navigate("/");
+		}
+		console.log(2);
+		if (error) {
+			toast.error("Try again");
+		}
+	}, [dispatch, isAuthenticated, navigate, error]);
 	return (
 		<>
 			{status === "loading" ? (

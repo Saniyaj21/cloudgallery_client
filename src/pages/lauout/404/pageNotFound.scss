@@ -1,0 +1,16 @@
+.page-not-found{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    >h2{
+        font-size: 20px;
+    }
+    >a{
+        text-decoration: underline;
+        cursor: pointer;
+        color: aqua;
+    }
+}

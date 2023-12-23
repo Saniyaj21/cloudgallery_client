@@ -21,6 +21,7 @@ const Home = () => {
 	return (
 		<>
 			<div className='home-container'>
+				<p><i className="fa-solid fa-circle-info"></i> This is a Beta version.</p>
 				<div className={`${view === "p" ? "open" : ""} photo-container`}>
 					<PhotosPage />
 				</div>
