@@ -2,7 +2,9 @@
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
+	
 }
+
 
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -10,12 +12,4 @@
 	background-color: #242424;
 	scroll-behavior:smooth;
 	
-}
-
-
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
-	}
 }
