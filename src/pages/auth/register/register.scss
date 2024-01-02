@@ -87,24 +87,4 @@
 	}
 }
 
-@media (prefers-color-scheme: light) {
-	div form.auth-form {
-		border: solid 1px rgba(3, 0, 0, 0.21);
-		background: rgba(30, 28, 28, 0.16);
 
-		input {
-			border: 1px solid rgba(8, 8, 8, 0.404);
-			background-color: rgba(30, 28, 28, 0.16);
-			color: black;
-		}
-		button {
-			border: 2px solid rgba(8, 8, 8, 0.404);
-			color: rgba(0, 0, 0, 0.607);
-			&:hover {
-				background-color: rgba(31, 81, 35, 0.829);
-				color: white;
-				border: solid 2px transparent;
-			}
-		}
-	}
-}
