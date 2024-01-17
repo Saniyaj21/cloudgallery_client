@@ -7,12 +7,12 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import LandingPage from '../lauout/loader/LandingPage';
 
 const Home = () => {
 	const [view, setView] = useState("p");
-	const { isAuthenticated , user} = useSelector(selectUser);
+	const { isAuthenticated, user, status } = useSelector(selectUser);
 	const navigate = useNavigate();
-
 
 	const toggleView = (param) => {
 		setView(param);
@@ -20,15 +20,22 @@ const Home = () => {
 
 	return (
 		<>
-			<div className='home-container'>
-				<p><i className="fa-solid fa-circle-info"></i> This is a Beta version.</p>
-				<div className={`${view === "p" ? "open" : ""} photo-container`}>
-					<PhotosPage />
+			{isAuthenticated ? (
+				<div className='home-container'>
+					<p>
+						<i className='fa-solid fa-circle-info'></i> This is a Beta version.
+					</p>
+					<div className={`${view === "p" ? "open" : ""} photo-container`}>
+						<PhotosPage />
+					</div>
+					<div className={`${view === "t" ? "open" : ""} text-container`}>
+						<TextsPage />
+					</div>
 				</div>
-				<div className={`${view === "t" ? "open" : ""} text-container`}>
-					<TextsPage />
-				</div>
-			</div>
+			) : (
+				<LandingPage status={status} />
+			)}
+
 			<Bottom toggleView={toggleView} />
 		</>
 	);
