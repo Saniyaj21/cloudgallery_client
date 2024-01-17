@@ -1,10 +1,10 @@
 import React from "react";
 import { ThreeDots } from "react-loader-spinner";
 import "./loader.scss";
-const Loader = () => {
+const Loader = ({text = 'Loading'}) => {
 	return (
 		<div className='loader-div'>
-			<span>Loading</span>
+			<span>{text}</span>
 			<ThreeDots
 				height='40'
 				width='40'

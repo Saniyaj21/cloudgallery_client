@@ -11,5 +11,11 @@
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #242424;
 	scroll-behavior:smooth;
+
+	/* colors */
+	--light-green: rgb(214, 251, 189);
+	--light-blue: rgb(190, 215, 246);
 	
 }
+
+

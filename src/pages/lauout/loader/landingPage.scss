@@ -1,0 +1,92 @@
+// LandingPage.scss
+
+.landing-page {
+	text-align: center;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding-bottom: 5rem;
+
+	header {
+		margin-bottom: 30px;
+
+		h1 {
+			font-size: 2.5em;
+			margin-bottom: 10px;
+			color: var(--light-green);
+		}
+
+		p {
+			color: var(--light-blue);
+		}
+	}
+
+	.features {
+		display: flex;
+		justify-content: space-around;
+
+		.feature {
+			max-width: 300px;
+			margin: 0 20px;
+
+			h2 {
+				font-size: 1.5em;
+				margin-bottom: 10px;
+			}
+
+			p {
+				color: var(--light-blue);
+			}
+		}
+	}
+	.join-us {
+		margin: 2rem;
+		a {
+			text-decoration: none;
+			display: block;
+
+			h2 {
+				font-size: 1.5em;
+				width: 10rem;
+				display: block;
+				margin: auto;
+				padding: 0.5rem 2rem;
+				border-radius: 0.5rem;
+				background: transparent;
+				border: 2px solid var(--light-green);
+				color: var(--light-green);
+				transition: border-radius 0.3s;
+				&:hover {
+					border-radius: 2.5rem;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	
+	.features {
+		display: flex;
+		gap: 20px;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+
+		.feature {
+			max-width: 300px;
+			margin: 0 20px;
+
+			h2 {
+				font-size: 1.5em;
+				margin-bottom: 10px;
+			}
+
+			p {
+				color: #555;
+			}
+		}
+	}
+	
+}
