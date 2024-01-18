@@ -17,6 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
 import Register from "./pages/auth/register/register.jsx";
 import PageNotFound from "./pages/lauout/404/PageNotFound.jsx";
+import UserProfile from "./pages/user/UserProfile.jsx";
 
 function App() {
 	const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
 				<Route element={<ProtectedRoute />}>
 					<Route path='/upload' element={<Upload />} />
 					<Route path='/profile' element={<Profile />} />
+					<Route path='/profile/:id' element={<UserProfile />} />
 				</Route>
 				<Route path='*' element={<PageNotFound />} />
 

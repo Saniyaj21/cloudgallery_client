@@ -5,6 +5,7 @@ import { base_url } from '../../main'
 
 const initialState = {
     images: [],
+    publicImages: [],
     selectedImage: {},
     status: 'idle',
     postStatus: 'idle',
@@ -15,6 +16,20 @@ const initialState = {
 export const allImages = createAsyncThunk('images/allImages', async () => {
 
     const response = await axios.get(`${base_url}/api/images`,
+
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        });
+
+    return response.data;
+});
+// get all public images
+export const allPublicImages = createAsyncThunk('images/allPublicImages', async () => {
+
+    const response = await axios.get(`${base_url}/api/images/public`,
 
         {
             headers: {
@@ -82,6 +97,21 @@ const imageSlice = createSlice({
 
             })
             .addCase(allImages.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            // all public images
+            .addCase(allPublicImages.pending, (state) => {
+                state.status = 'loading';
+                state.error = null
+            })
+            .addCase(allPublicImages.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.publicImages = action.payload.allImages;
+
+
+            })
+            .addCase(allPublicImages.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             })

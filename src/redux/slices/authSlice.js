@@ -5,6 +5,7 @@ import { base_url } from '../../main'
 
 const initialState = {
   user: {},
+  selectedUser: {},
   isAuthenticated: false,
   status: 'idle',
   error: null,
@@ -59,6 +60,16 @@ export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
 export const getUser = createAsyncThunk('user/getUser', async () => {
 
   const response = await axios.get(`${base_url}/api/user/profile`, {
+    withCredentials: true,
+  });
+
+
+  return response.data;
+});
+// get user details - profile
+export const getUserProfile = createAsyncThunk('user/getUserProfile', async (id) => {
+
+  const response = await axios.get(`${base_url}/api/user/profile/${id}`, {
     withCredentials: true,
   });
 
@@ -142,6 +153,22 @@ const userSlice = createSlice({
 
       })
       .addCase(getUser.rejected, (state, action) => {
+
+        state.status = 'failed';
+
+      })
+      //  get user profile  detailsF
+      .addCase(getUserProfile.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(getUserProfile.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.selectedUser = action.payload.user;
+      
+
+      })
+      .addCase(getUserProfile.rejected, (state, action) => {
 
         state.status = 'failed';
 

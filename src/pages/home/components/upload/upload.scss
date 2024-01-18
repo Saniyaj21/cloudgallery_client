@@ -3,7 +3,6 @@
 	padding: 0;
 	box-sizing: border-box;
 	text-align: center;
-	
 }
 
 div {
@@ -19,42 +18,50 @@ div {
 			text-align: center;
 
 			> label {
-				> h3 {
-					padding: 10px 0px;
-                    cursor: pointer;
-				}
+				cursor: pointer;
 			}
-
+			> h3 {
+				padding: 10px 0px;
+			}
 			img {
 				width: 90%;
 				display: block;
 				margin: auto;
-                border-radius: 10px;
-                border: 2px solid white;
+				border-radius: 10px;
+				border: 2px solid white;
 				margin-top: 20px;
 				margin-bottom: 20px;
 				max-height: 330px;
 				object-fit: cover;
-				margin-bottom: 20px;
 			}
-            > h3 {
-                padding: 10px 0px;
-               
-            }
+			> h3 {
+				padding: 10px 0px;
+			}
+			.visiblity {
+				> span {
+					cursor: pointer;
+					color: var(--light-green);
+					transition: color 0.3s;
+					&:hover{
+						color: var(--light-blue);
+					}
+				}
+				border-bottom: 2px solid var(--white);
+			}
 			.caption {
 				width: 90%;
 				height: 150px;
-                border-radius: 10px;
+				border-radius: 10px;
 				background: transparent;
-                border: 1px solid rgba(255, 255, 255, 0.248);
+				border: 1px solid rgba(255, 255, 255, 0.248);
 				outline: none;
-				color:white;
+				color: white;
 				font-size: 16px;
-                text-align: left;
-                padding: 10px;
+				text-align: left;
+				padding: 10px;
 				background-color: #2424249a;
 			}
-			.submit{
+			.submit {
 				background-color: white;
 				cursor: pointer;
 				margin: 10px 0px;
@@ -65,7 +72,7 @@ div {
 				border: 2px solid white;
 				font-size: 16px;
 				font-family: "Roboto";
-				
+
 				transition: 0.5s;
 				&:hover {
 					background-color: #242424;
@@ -77,9 +84,7 @@ div {
 }
 
 @media only screen and (max-width: 700px) {
-
 	div .form-container form {
 		width: 300px;
 	}
 }
-
