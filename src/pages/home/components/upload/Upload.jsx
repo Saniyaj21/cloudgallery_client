@@ -1,4 +1,4 @@
-import {useState } from "react";
+import { useState } from "react";
 import "./upload.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,7 @@ const Upload = () => {
 	const [imgPreview, setImgPreview] = useState("/image.png");
 	const [caption, setCaption] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [visiblity, setVisiblity] = useState(false);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { status } = useSelector(selectImages);
@@ -40,7 +41,7 @@ const Upload = () => {
 				setImgPreview(e.target.result);
 			};
 
-			reader.readAsDataURL(compressedFile); 
+			reader.readAsDataURL(compressedFile);
 		} catch (error) {
 			console.log(error);
 		}
@@ -57,6 +58,7 @@ const Upload = () => {
 		const myForm = new FormData();
 		myForm.set("imageData", imageData);
 		myForm.append("caption", caption);
+		myForm.append("isPublic", visiblity);
 		dispatch(resetState());
 		dispatch(postImage(myForm));
 		if (status === "succeeded") {
@@ -81,8 +83,8 @@ const Upload = () => {
 										alt=''
 									/>
 								)}
-								<h3>Select Image</h3>
 							</label>
+							<h3>Select Image</h3>
 							<hr />
 							<input
 								hidden
@@ -95,6 +97,19 @@ const Upload = () => {
 							/>
 
 							<br></br>
+
+							<h3 className='visiblity'>
+								Visiblity : {" "}
+								{visiblity ? (
+									<span onClick={()=>setVisiblity(!visiblity)}>
+										Public <i className='fa-solid fa-earth-asia'></i>
+									</span>
+								) : (
+									<span onClick={()=>setVisiblity(!visiblity)}>
+										Only You <i className='fa-solid fa-lock'></i>
+									</span>
+								)}
+							</h3>
 							<h3>Enter a description</h3>
 
 							<textarea
@@ -109,7 +124,7 @@ const Upload = () => {
 							></textarea>
 
 							<button className='submit' type='submit' disabled={loading}>
-							Upload <i className='fa-solid fa-cloud-arrow-up'></i>
+								Upload <i className='fa-solid fa-cloud-arrow-up'></i>
 							</button>
 						</form>
 					</div>

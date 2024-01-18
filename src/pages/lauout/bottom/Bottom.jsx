@@ -11,7 +11,7 @@ const Bottom = ({toggleView}) => {
 			</div>
 			<div onClick={()=>toggleView('t')}>
 				<p >
-					Publics <i className="fa-solid fa-envelope-open-text"></i>
+					Public <i className="fa-solid fa-earth-asia"></i>
 				</p>
 				
 			</div>

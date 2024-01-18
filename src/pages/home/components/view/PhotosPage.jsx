@@ -66,18 +66,25 @@ const PhotosPage = () => {
 						</div>
 						<div>
 							<button
+							// onClick={() => {
+							// 	handleDownload(img.url, img.public_id);
+							// }}
+							>
+								<i className='fa-solid fa-share-from-square'></i>
+							</button>
+							<button
 								onClick={() => {
 									deleteImageHandler(img._id);
 								}}
 							>
-								Delete <i className='fa-solid fa-trash'></i>
+								<i className='fa-solid fa-trash'></i>
 							</button>
 							<button
 								onClick={() => {
 									handleDownload(img.url, img.public_id);
 								}}
 							>
-								Save <i className='fa-solid fa-download'></i>
+								<i className='fa-solid fa-download'></i>
 							</button>
 						</div>
 					</div>
