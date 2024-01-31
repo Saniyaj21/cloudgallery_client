@@ -18,6 +18,7 @@ import "react-toastify/ReactToastify.min.css";
 import Register from "./pages/auth/register/register.jsx";
 import PageNotFound from "./pages/lauout/404/PageNotFound.jsx";
 import UserProfile from "./pages/user/UserProfile.jsx";
+import RecoverPassword from "./pages/auth/forgotPassword/RecoverPassword.jsx";
 
 function App() {
 	const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
 			<Routes>
 				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<Login />} />
+				<Route path='/password/recover' element={<RecoverPassword />} />
 
 				<Route path='/' element={<Home />} />
 				{/* Restricted routes */}

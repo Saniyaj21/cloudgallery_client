@@ -19,7 +19,7 @@ const TextsPage = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(resetState());
+		// dispatch(resetState());
 		dispatch(allPublicImages());
 		if (error) {
 			toast.error("Try again!", {
@@ -33,7 +33,6 @@ const TextsPage = () => {
 	}, [error, images?.length]);
 
 	const deleteImageHandler = (id) => {
-		dispatch(resetState());
 		dispatch(deleteImage(id));
 		toast.success("Deleted Successfully!", {
 			position: "top-right",
@@ -79,7 +78,6 @@ const TextsPage = () => {
 								</div>
 								<div>
 									<div className='btn-group'>
-										
 										<button
 										// onClick={() => {
 										// 	handleDownload(img.url, img.public_id);
@@ -94,7 +92,7 @@ const TextsPage = () => {
 										>
 											<i className='fa-solid fa-share-from-square'></i>
 										</button>
-                    <button
+										<button
 											onClick={() => {
 												handleDownload(img.url, img.public_id);
 											}}
