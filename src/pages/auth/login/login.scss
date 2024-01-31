@@ -62,10 +62,11 @@
         }
         >p{
             font-family: "Roboto";
+			margin: 5px 0px;
 
             >a{
                 margin-left: 5px;
-                color: aqua;
+                color: rgb(15, 206, 206);
                 cursor: pointer;
                 text-decoration: none;
                 transition: 0.2s;

@@ -59,13 +59,20 @@ export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
 // get user details - profile
 export const getUser = createAsyncThunk('user/getUser', async () => {
 
+
   const response = await axios.get(`${base_url}/api/user/profile`, {
     withCredentials: true,
   });
-
-
   return response.data;
+
+
+
+
+
 });
+
+
+
 // get user details - profile
 export const getUserProfile = createAsyncThunk('user/getUserProfile', async (id) => {
 
@@ -165,7 +172,7 @@ const userSlice = createSlice({
       .addCase(getUserProfile.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.selectedUser = action.payload.user;
-      
+
 
       })
       .addCase(getUserProfile.rejected, (state, action) => {
