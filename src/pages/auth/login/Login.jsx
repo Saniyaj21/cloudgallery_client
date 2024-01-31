@@ -72,6 +72,10 @@ function Login() {
 								New to here?
 								<Link to={"/register"}> Register Now</Link>
 							</p>
+							<p>
+								Forget Password?
+								<Link to={"/password/recover"}> Recover Password</Link>
+							</p>
 						</form>
 					</div>
 				</>
