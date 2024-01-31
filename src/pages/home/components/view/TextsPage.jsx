@@ -30,7 +30,7 @@ const TextsPage = () => {
 			});
 			return;
 		}
-	}, [error, images.length]);
+	}, [error, images?.length]);
 
 	const deleteImageHandler = (id) => {
 		dispatch(resetState());
@@ -57,7 +57,7 @@ const TextsPage = () => {
 			})
 			.catch((error) => console.error("Error downloading image:", error));
 	};
-	console.log(publicImages);
+	// console.log(publicImages);
 	return (
 		<div className='public-page-div'>
 			{publicImages &&
