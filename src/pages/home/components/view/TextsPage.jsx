@@ -16,7 +16,7 @@ import { selectUser } from "../../../../redux/slices/authSlice";
 import { Link } from "react-router-dom";
 
 const TextsPage = () => {
-	const { publicImages, images, postStatus, error } = useSelector(selectImages);
+	const { publicImages, images, postStatus, error , likeChanges} = useSelector(selectImages);
 	const { user } = useSelector(selectUser);
 	const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const TextsPage = () => {
 			});
 			return;
 		}
-	}, [error, images?.length, publicImages]);
+	}, [error, images?.length, likeChanges]);
 
 	const deleteImageHandler = (id) => {
 		dispatch(deleteImage(id));
@@ -67,7 +67,7 @@ const TextsPage = () => {
 		}
 	};
 
-	// console.log(publicImages);
+	console.log(publicImages);
 	return (
 		<div className='public-page-div'>
 			{publicImages &&

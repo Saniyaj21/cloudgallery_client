@@ -52,18 +52,19 @@
                 display: flex;
                 justify-content: space-evenly;
 				> button {
+					font-size: 18px;
 					background: transparent;
 					cursor: pointer;
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					gap: 10px;
+					gap: 5px;
 					color: white;
 					padding: 8px 15px;
 					border-radius: 10px;
 					font-family: "Roboto";
 					transition: 0.5s;
-					border: 1px solid white;
+					border: none;
 					margin: 10px 10px;
 					&:hover {
 						background-color: white;

@@ -10,6 +10,7 @@ const initialState = {
     status: 'idle',
     postStatus: 'idle',
     error: null,
+    likeChanges: false,
 };
 
 // Define an async thunk to fetch products from the API
@@ -197,6 +198,9 @@ const imageSlice = createSlice({
                 state.status = 'succeeded';
                 console.log(action.payload)
                 state.publicImages = action.payload.allImages;
+                state.likeChanges = ! state.likeChanges;
+
+               
             })
             .addCase(likeImage.rejected, (state, action) => {
                 state.status = 'failed';
@@ -211,6 +215,7 @@ const imageSlice = createSlice({
                 state.status = 'succeeded';
                 console.log(action.payload)
                 state.publicImages = action.payload.allImages;
+                state.likeChanges = ! state.likeChanges;
             })
             .addCase(unlikeImage.rejected, (state, action) => {
                 state.status = 'failed';
