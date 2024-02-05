@@ -5,8 +5,10 @@ import {
 	allImages,
 	allPublicImages,
 	deleteImage,
+	likeImage,
 	resetState,
 	selectImages,
+	unlikeImage,
 } from "../../../../redux/slices/imageSlice";
 import Loader from "../../../lauout/loader/Loader";
 import { toast } from "react-toastify";
@@ -30,7 +32,7 @@ const TextsPage = () => {
 			});
 			return;
 		}
-	}, [error, images?.length]);
+	}, [error, images?.length, publicImages]);
 
 	const deleteImageHandler = (id) => {
 		dispatch(deleteImage(id));
@@ -56,6 +58,15 @@ const TextsPage = () => {
 			})
 			.catch((error) => console.error("Error downloading image:", error));
 	};
+
+	const handleLikeUnlike = (id, img) => {
+		if (img.likes.includes(user._id)) {
+			dispatch(unlikeImage({ id, userId: user._id }));
+		} else {
+			dispatch(likeImage({ id, userId: user._id }));
+		}
+	};
+
 	// console.log(publicImages);
 	return (
 		<div className='public-page-div'>
@@ -67,7 +78,7 @@ const TextsPage = () => {
 								<div>
 									<div>
 										<Link to={`/profile/${img.user._id}`}>
-											<img src={img.user?.avatar.url} alt={img.user.name} />
+											<img src={img.user?.avatar?.url} alt={img.user.name} />
 										</Link>
 										<p>{img.user.name}</p>
 									</div>
@@ -79,11 +90,15 @@ const TextsPage = () => {
 								<div>
 									<div className='btn-group'>
 										<button
-										// onClick={() => {
-										// 	handleDownload(img.url, img.public_id);
-										// }}
+											onClick={() => {
+												handleLikeUnlike(img._id, img);
+											}}
 										>
-											<i className='fa-solid fa-heart'></i>
+											<i
+												className={` fa-solid fa-heart ${
+													img.likes.includes(user._id) ? "liked-red-heart" : ""
+												}`}
+											></i>
 										</button>
 										<button
 										// onClick={() => {

@@ -71,6 +71,45 @@ export const deleteImage = createAsyncThunk('images/deleteImage', async (id) => 
 });
 
 
+// like image
+export const likeImage = createAsyncThunk('images/likeImage', async ({ id, userId }) => {
+
+    // image id
+    const response = await axios.post(`${base_url}/api/images/likes/${id}`,
+        {
+            userId
+        },
+
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        });
+
+    return response.data;
+});
+
+// unlike image
+export const unlikeImage = createAsyncThunk('images/unlikeImage', async ({ id, userId }) => {
+
+    // image id
+    const response = await axios.post(`${base_url}/api/images/unlikes/${id}`,
+        {
+            userId
+        },
+
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        });
+
+    return response.data;
+});
+
+
 const imageSlice = createSlice({
     name: 'image',
     initialState,
@@ -146,6 +185,34 @@ const imageSlice = createSlice({
 
             })
             .addCase(deleteImage.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            // like image
+            .addCase(likeImage.pending, (state) => {
+                state.status = 'loading';
+                state.error = null
+            })
+            .addCase(likeImage.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                console.log(action.payload)
+                state.publicImages = action.payload.allImages;
+            })
+            .addCase(likeImage.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            // unlike image
+            .addCase(unlikeImage.pending, (state) => {
+                state.status = 'loading';
+                state.error = null
+            })
+            .addCase(unlikeImage.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                console.log(action.payload)
+                state.publicImages = action.payload.allImages;
+            })
+            .addCase(unlikeImage.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             })
