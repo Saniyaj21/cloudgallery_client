@@ -11,7 +11,7 @@ const initialState = {
   error: null,
   isOtpSent: false,
   isEmailVerified: false,
-  mail:{
+  mail: {
     mailStatus: 'idle',
     otpStatus: 'idle',
     passwordStatus: 'idle',
@@ -66,15 +66,10 @@ export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
 // get user details - profile
 export const getUser = createAsyncThunk('user/getUser', async () => {
 
-
   const response = await axios.get(`${base_url}/api/user/profile`, {
     withCredentials: true,
   });
   return response.data;
-
-
-
-
 
 });
 
@@ -135,7 +130,7 @@ const userSlice = createSlice({
     clearError: (state, action) => {
 
       state.error = null,
-      state.isOtpSent = false;
+        state.isOtpSent = false;
       state.isEmailVerified = false;
       state.mail.mailStatus = 'idle';
       state.mail.otpStatus = 'idle';

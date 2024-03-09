@@ -19,7 +19,6 @@ function Register() {
 	const dispatch = useDispatch();
 	const { isAuthenticated, status, error } = useSelector(selectUser);
 
-
 	const handleFileChange = async (e) => {
 		const imageFile = e.target.files[0];
 
@@ -83,7 +82,7 @@ function Register() {
 	};
 
 	useEffect(() => {
-		dispatch(clearError())
+		dispatch(clearError());
 		if (isAuthenticated === true) {
 			navigate("/");
 		}
