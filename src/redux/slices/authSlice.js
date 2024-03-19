@@ -1,9 +1,10 @@
 // productSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import api from '../../utils/axiosInterceptor.js'
 import { base_url } from '../../main'
 
 const initialState = {
+  token: localStorage.getItem('token') || null,
   user: {},
   selectedUser: {},
   isAuthenticated: false,
@@ -21,7 +22,7 @@ const initialState = {
 // Define an async thunk to fetch products from the API
 export const loginUser = createAsyncThunk('user/loginUser', async (user) => {
 
-  const response = await axios.post(`${base_url}/api/user/login`,
+  const response = await api.post(`${base_url}/api/user/login`,
     {
       email: user.email,
       password: user.password
@@ -39,7 +40,7 @@ export const loginUser = createAsyncThunk('user/loginUser', async (user) => {
 // register user
 export const registerUser = createAsyncThunk('user/registerUser', async (myForm) => {
 
-  const response = await axios.post(`${base_url}/api/user/register`, myForm, {
+  const response = await api.post(`${base_url}/api/user/register`, myForm, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -51,14 +52,14 @@ export const registerUser = createAsyncThunk('user/registerUser', async (myForm)
 
 // logout user
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
-
-  const response = await axios.get(`${base_url}/api/user/logout`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    });
+  const response = await api.get(`${base_url}/api/user/logout`,
+  {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  });
+  console.log(response);
 
   return response.data;
 });
@@ -66,7 +67,7 @@ export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
 // get user details - profile
 export const getUser = createAsyncThunk('user/getUser', async () => {
 
-  const response = await axios.get(`${base_url}/api/user/profile`, {
+  const response = await api.get(`${base_url}/api/user/profile`, {
     withCredentials: true,
   });
   return response.data;
@@ -78,7 +79,7 @@ export const getUser = createAsyncThunk('user/getUser', async () => {
 // get user details - profile
 export const getUserProfile = createAsyncThunk('user/getUserProfile', async (id) => {
 
-  const response = await axios.get(`${base_url}/api/user/profile/${id}`, {
+  const response = await api.get(`${base_url}/api/user/profile/${id}`, {
     withCredentials: true,
   });
 
@@ -89,7 +90,7 @@ export const getUserProfile = createAsyncThunk('user/getUserProfile', async (id)
 // get user details - profile
 export const getResetPasswordOTP = createAsyncThunk('user/getResetPasswordOTP', async (email) => {
 
-  const response = await axios.post(`${base_url}/api/user/password/forgot`, { email }, {
+  const response = await api.post(`${base_url}/api/user/password/forgot`, { email }, {
     withCredentials: true,
   });
 
@@ -101,7 +102,7 @@ export const getResetPasswordOTP = createAsyncThunk('user/getResetPasswordOTP', 
 // verify the otp in backend 
 export const verifyOTP = createAsyncThunk('user/verifyOTP', async (resetPasswordOTP) => {
 
-  const response = await axios.post(`${base_url}/api/user/verify/otp`, { resetPasswordOTP }, {
+  const response = await api.post(`${base_url}/api/user/verify/otp`, { resetPasswordOTP }, {
     withCredentials: true,
   });
 
@@ -113,7 +114,7 @@ export const verifyOTP = createAsyncThunk('user/verifyOTP', async (resetPassword
 // verify the otp in backend 
 export const setNewPassword = createAsyncThunk('user/setNewPassword', async ({ resetPasswordOTP, password }) => {
 
-  const response = await axios.post(`${base_url}/api/user/password/reset`, { resetPasswordOTP, password }, {
+  const response = await api.post(`${base_url}/api/user/password/reset`, { resetPasswordOTP, password }, {
     withCredentials: true,
   });
 
@@ -149,6 +150,8 @@ const userSlice = createSlice({
         state.status = 'succeeded';
         state.user = action.payload.user;
         state.isAuthenticated = true;
+        state.token = action.payload.token;
+        localStorage.setItem('token', action.payload.token);
 
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -165,6 +168,8 @@ const userSlice = createSlice({
         state.status = 'succeeded';
         state.user = action.payload.user;
         state.isAuthenticated = true;
+        state.token = action.payload.token;
+        localStorage.setItem('token', action.payload.token);
       })
       .addCase(registerUser.rejected, (state, action) => {
 
@@ -182,6 +187,8 @@ const userSlice = createSlice({
         state.status = 'succeeded';
         state.user = null;
         state.isAuthenticated = false;
+        localStorage.removeItem('token');
+        state.token = null;
 
       })
       .addCase(logoutUser.rejected, (state, action) => {
@@ -256,6 +263,8 @@ const userSlice = createSlice({
         state.mail.passwordStatus = 'succeeded';
         state.user = action.payload.user;
         state.isAuthenticated = true;
+        state.token = action.payload.token;
+        localStorage.setItem('token', action.payload.token);
       })
       .addCase(setNewPassword.rejected, (state, action) => {
         state.mail.passwordStatus = 'failed';

@@ -17,15 +17,8 @@ const PhotosPage = () => {
 	useEffect(() => {
 		dispatch(resetState());
 		dispatch(allImages());
-		if (error) {
-			toast.error("Try again!", {
-				position: "top-right",
-				autoClose: 5000,
-				closeOnClick: true,
-				theme: "colored",
-			});
-		}
-	}, [error]);
+	
+	}, []);
 
 	const deleteImageHandler = (id) => {
 		dispatch(resetState());

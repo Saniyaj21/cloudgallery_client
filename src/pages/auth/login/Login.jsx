@@ -37,11 +37,11 @@ function Login() {
 		if (isAuthenticated === true) {
 			navigate("/");
 		}
-		console.log(2);
-		if (error) {
-			toast.error("Try again");
-		}
-	}, [dispatch, isAuthenticated, navigate, error]);
+		// console.log(2);
+		// if (error) {
+		// 	toast.error("Try again");
+		// }
+	}, [dispatch, isAuthenticated, navigate]);
 	return (
 		<>
 			{status === "loading" ? (
