@@ -1,7 +1,7 @@
 // productSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { base_url } from '../../main'
+import api from '../../utils/axiosInterceptor.js'
 
 const initialState = {
     images: [],
@@ -16,7 +16,7 @@ const initialState = {
 // Define an async thunk to fetch products from the API
 export const allImages = createAsyncThunk('images/allImages', async () => {
 
-    const response = await axios.get(`${base_url}/api/images`,
+    const response = await api.get(`${base_url}/api/images`,
 
         {
             headers: {
@@ -30,7 +30,7 @@ export const allImages = createAsyncThunk('images/allImages', async () => {
 // get all public images
 export const allPublicImages = createAsyncThunk('images/allPublicImages', async () => {
 
-    const response = await axios.get(`${base_url}/api/images/public`,
+    const response = await api.get(`${base_url}/api/images/public`,
 
         {
             headers: {
@@ -44,7 +44,7 @@ export const allPublicImages = createAsyncThunk('images/allPublicImages', async 
 // Define an async thunk to fetch products from the API
 export const postImage = createAsyncThunk('images/postImage', async (myForm) => {
 
-    const response = await axios.post(`${base_url}/api/images`,
+    const response = await api.post(`${base_url}/api/images`,
         myForm,
 
         {
@@ -59,7 +59,7 @@ export const postImage = createAsyncThunk('images/postImage', async (myForm) => 
 // Define an async thunk to fetch products from the API
 export const deleteImage = createAsyncThunk('images/deleteImage', async (id) => {
 
-    const response = await axios.delete(`${base_url}/api/images/${id}`,
+    const response = await api.delete(`${base_url}/api/images/${id}`,
 
         {
             headers: {
@@ -76,7 +76,7 @@ export const deleteImage = createAsyncThunk('images/deleteImage', async (id) => 
 export const likeImage = createAsyncThunk('images/likeImage', async ({ id, userId }) => {
 
     // image id
-    const response = await axios.post(`${base_url}/api/images/likes/${id}`,
+    const response = await api.post(`${base_url}/api/images/likes/${id}`,
         {
             userId
         },
@@ -95,7 +95,7 @@ export const likeImage = createAsyncThunk('images/likeImage', async ({ id, userI
 export const unlikeImage = createAsyncThunk('images/unlikeImage', async ({ id, userId }) => {
 
     // image id
-    const response = await axios.post(`${base_url}/api/images/unlikes/${id}`,
+    const response = await api.post(`${base_url}/api/images/unlikes/${id}`,
         {
             userId
         },

@@ -16,23 +16,15 @@ import { selectUser } from "../../../../redux/slices/authSlice";
 import { Link } from "react-router-dom";
 
 const TextsPage = () => {
-	const { publicImages, images, postStatus, error , likeChanges} = useSelector(selectImages);
+	const { publicImages, images, postStatus, error, likeChanges } =
+		useSelector(selectImages);
 	const { user } = useSelector(selectUser);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		// dispatch(resetState());
 		dispatch(allPublicImages());
-		if (error) {
-			toast.error("Try again!", {
-				position: "top-right",
-				autoClose: 5000,
-				closeOnClick: true,
-				theme: "colored",
-			});
-			return;
-		}
-	}, [error, images?.length, likeChanges]);
+	}, [images?.length, likeChanges]);
 
 	const deleteImageHandler = (id) => {
 		dispatch(deleteImage(id));
@@ -100,11 +92,7 @@ const TextsPage = () => {
 												}`}
 											></i>
 										</button>
-										<button
-										// onClick={() => {
-										// 	handleDownload(img.url, img.public_id);
-										// }}
-										>
+										<button>
 											<i className='fa-solid fa-share-from-square'></i>
 										</button>
 										<button
