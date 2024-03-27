@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import Loader from "./Loader";
 
 const LandingPage = ({ status }) => {
-
 	return (
 		<div className='landing-page'>
 			<header>
 				<h1>Your Cloud Gallery</h1>
 				<p>Upload, share, and organize your memories with ease.</p>
+				<Link to={'/compress'}><button>Compress Image</button></Link>
 			</header>
 
 			<section className='features'>
@@ -36,8 +36,6 @@ const LandingPage = ({ status }) => {
 				</Link>
 				{status === "loading" ? <Loader text='Trying To Login' /> : ""}
 			</section>
-
-	
 		</div>
 	);
 };

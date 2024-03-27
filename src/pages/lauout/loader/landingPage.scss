@@ -20,6 +20,17 @@
 		p {
 			color: var(--light-blue);
 		}
+		a {
+			button {
+				padding: 10px 15px;
+				border-radius: 15px;
+				background: transparent;
+				border: 2px solid var(--light-green);
+				margin: 20px 0px;
+				font-size: 18px;
+				color: white;
+			}
+		}
 	}
 
 	.features {
@@ -66,7 +77,6 @@
 }
 
 @media only screen and (max-width: 700px) {
-	
 	.features {
 		display: flex;
 		gap: 20px;
@@ -88,5 +98,4 @@
 			}
 		}
 	}
-	
 }

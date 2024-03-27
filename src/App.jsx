@@ -19,6 +19,7 @@ import Register from "./pages/auth/register/register.jsx";
 import PageNotFound from "./pages/lauout/404/PageNotFound.jsx";
 import UserProfile from "./pages/user/UserProfile.jsx";
 import RecoverPassword from "./pages/auth/forgotPassword/RecoverPassword.jsx";
+import Compress from "./pages/compress/Compress.jsx";
 
 function App() {
 	const dispatch = useDispatch();
@@ -35,12 +36,13 @@ function App() {
 			<Header />
 			<ToastContainer />
 			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/compress' element={<Compress />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/password/recover' element={<RecoverPassword />} />
 
-				<Route path='/' element={<Home />} />
-				{/* Restricted routes */}
+				
 				<Route element={<ProtectedRoute />}>
 					<Route path='/upload' element={<Upload />} />
 					<Route path='/profile' element={<Profile />} />
