@@ -92,7 +92,12 @@ const TextsPage = () => {
 												}`}
 											></i>
 										</button> */}
-										<button>
+										<button onClick={() => {
+											img &&
+												navigator.clipboard.writeText(img?.url).then(() => {
+													toast.success("Url copied");
+												});
+										}}>
 											<i className='fa-solid fa-share-from-square'></i>
 										</button>
 										<button
