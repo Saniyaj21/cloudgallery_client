@@ -28,7 +28,7 @@ const Header = () => {
 					</Link>
 				</div>
 				<div>
-					{!isAuthenticated ? (
+					{isAuthenticated ? (
 						<>
 							<Link className='upload-btn' to={"/upload"}>
 								Upload <i className='fa-solid fa-cloud-arrow-up'></i>
