@@ -79,6 +79,12 @@ const PublicImageCard = ({img }) => {
 							// onClick={() => {
 							// 	handleDownload(img.url, img.public_id);
 							// }}
+							onClick={() => {
+								img &&
+									navigator.clipboard.writeText(img?.url).then(() => {
+										toast.success("Url copied");
+									});
+							}}
 							>
 								<i className='fa-solid fa-share-from-square'></i>
 							</button>
