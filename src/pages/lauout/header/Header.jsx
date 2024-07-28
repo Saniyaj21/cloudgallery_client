@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import sani from "../../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser, selectUser } from "../../../redux/slices/authSlice";
+import { FaCompressArrowsAlt } from "react-icons/fa";
 
 const Header = () => {
 	const [dp, setDp] = useState(sani);
@@ -27,7 +28,7 @@ const Header = () => {
 					</Link>
 				</div>
 				<div>
-					{isAuthenticated ? (
+					{!isAuthenticated ? (
 						<>
 							<Link className='upload-btn' to={"/upload"}>
 								Upload <i className='fa-solid fa-cloud-arrow-up'></i>
@@ -47,6 +48,11 @@ const Header = () => {
 								<Link to={"/profile"}>
 									<div>
 										<i className='fa-solid fa-user'></i> Profile
+									</div>
+								</Link>
+								<Link to={"/compress"}>
+									<div>
+										< FaCompressArrowsAlt/> Compress
 									</div>
 								</Link>
 								<div onClick={toggleOpen}>
