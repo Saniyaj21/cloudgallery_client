@@ -68,13 +68,13 @@ const PublicImageCard = ({img }) => {
 					</div>
 					<div>
 						<div className='btn-group'>
-							<button
+							{/* <button
 								onClick={() => {
 									handleLikeUnlike(img._id);
 								}}
 							>
 								<i className='fa-solid fa-heart'></i>
-							</button>
+							</button> */}
 							<button
 							// onClick={() => {
 							// 	handleDownload(img.url, img.public_id);
