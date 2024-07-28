@@ -81,7 +81,7 @@ const TextsPage = () => {
 								</div>
 								<div>
 									<div className='btn-group'>
-										<button
+										{/* <button
 											onClick={() => {
 												handleLikeUnlike(img._id, img);
 											}}
@@ -91,7 +91,7 @@ const TextsPage = () => {
 													img.likes.includes(user._id) ? "liked-red-heart" : ""
 												}`}
 											></i>
-										</button>
+										</button> */}
 										<button>
 											<i className='fa-solid fa-share-from-square'></i>
 										</button>
