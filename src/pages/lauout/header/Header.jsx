@@ -9,7 +9,7 @@ const Header = () => {
 	const [dp, setDp] = useState(sani);
 	const [isOpen, setIsOpen] = useState(false);
 	const dispatch = useDispatch();
-	const { user } = useSelector(selectUser);
+	const { user, isAuthenticated } = useSelector(selectUser);
 
 	const toggleOpen = () => {
 		setIsOpen(!isOpen);
@@ -27,7 +27,7 @@ const Header = () => {
 					</Link>
 				</div>
 				<div>
-					{user ? (
+					{isAuthenticated ? (
 						<>
 							<Link className='upload-btn' to={"/upload"}>
 								Upload <i className='fa-solid fa-cloud-arrow-up'></i>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import imageCompression from "browser-image-compression";
 import "./compress.scss";
+import { MdCloudUpload } from "react-icons/md";
+import { MdCloudDownload } from "react-icons/md";
 
 const Compress = () => {
 	const [resultImg, setResultImg] = useState();
@@ -10,7 +12,7 @@ const Compress = () => {
 	const [v, setV] = useState(null);
 	const [CPSize, setCPSize] = useState(null);
 	const [loading, setLoading] = useState(false);
-	
+
 
 	console.log(percent, originalSize);
 	console.log(loading);
@@ -19,16 +21,16 @@ const Compress = () => {
 		if (v !== null) {
 			handleImageUpload(v);
 		}
-	}, [ percent]);
+	}, [percent]);
 
 	const handleImageUpload = async (imageFile) => {
 		console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 		let originalSize = imageFile.size / 1024 / 1024;
 		setOriginalSize(originalSize.toFixed(3));
 		setLoading(true)
-		
+
 		const options = {
-			maxSizeMB: (percent /10).toFixed(1),
+			maxSizeMB: (percent / 10).toFixed(1),
 			maxWidthOrHeight: 1920,
 			useWebWorker: true,
 		};
@@ -69,7 +71,8 @@ const Compress = () => {
 		<div className='compress-container'>
 			<div className='btn-container'>
 				<form action=''>
-					<input onChange={setImageHandler} type='file' name='' id='' />
+					<label htmlFor="img" className="img-level"><MdCloudUpload /><span>Upload image</span></label>
+					<input onChange={setImageHandler} type='file' name='' id='img' />
 				</form>
 				{resultImg && (
 					<a
@@ -77,15 +80,21 @@ const Compress = () => {
 						download='compressed_image.jpg'
 						className='download-link'
 					>
-						Download
+						<MdCloudDownload /> <span>Download</span>
 					</a>
 				)}
 			</div>
 			<div className='result-container'>
 				<div className='images-box'>
-					<img className='compress-img' src={imgPreview} alt='' />
+					<div>
+						<img className='compress-img' src={imgPreview} alt='' />
+						<p>Original Size: {originalSize}mb</p>
+					</div>
 					{
-						loading === true ? <h2>Loading</h2> :<img className='compress-img' src={resultImg} alt='hi' />
+						loading === true ? <h2>Processing...</h2> : resultImg ? <div>
+							<img className='compress-img' src={resultImg} alt='hi' />
+							<p>Compress Size: {CPSize * 1000}kb</p>
+						</div> : ""
 					}
 				</div>
 				<div className='size-range'>
@@ -96,9 +105,8 @@ const Compress = () => {
 						value={percent}
 						onChange={(e) => setPercentage(e.target.value)}
 					/>
-					<p>Value: {percent}%</p>
-					<p>original Size: {originalSize}mb</p>
-					<p>compress Size: {CPSize}mb</p>
+					<p>{percent}% of File Size</p>
+
 				</div>
 			</div>
 		</div>
